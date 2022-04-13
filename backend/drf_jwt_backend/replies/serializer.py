@@ -5,4 +5,4 @@ from .models import Replies;
 class repliesSerializer(serializers.ModelSerializer):
     class meta:
         model = Replies
-        fields = ['']
+        fields = ['id','user','comment','text']
