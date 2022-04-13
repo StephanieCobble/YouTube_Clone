@@ -14,11 +14,7 @@ class CommentsList(APIView, AllowAny):
         serializer = CommentsSerializer(comments, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
-    def post(self, request, format=None):
-        serializer = CommentsSerializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        serializer.save()
-        return Response(serializer.data, status=status.HTTP_201_CREATED)
+    
 
 class CommentsDetail(APIView, IsAuthenticated):
     def get_object(self, pk):
@@ -26,6 +22,12 @@ class CommentsDetail(APIView, IsAuthenticated):
             return Comments.objects.get(pk=pk)  
         except Comments.DoesNotExist:
             raise Http404
+
+    def post(self, request, format=None):
+        serializer = CommentsSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
 
     def get(self, request, pk, format=None):
         comments = self.get_object(pk)
