@@ -4,7 +4,8 @@ from .import views
 
 urlpatterns = [
     path('', views.CommentsList.as_view()),
-    path('<int:pk>/', views.CommentsDetail.as_view())
+    path('<int:pk>/', views.CommentsDetail.as_view),
+    path('', views.CommentsDetail.as_view)
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)
