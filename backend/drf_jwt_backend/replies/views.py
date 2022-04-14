@@ -15,11 +15,7 @@ class RepliesList(APIView, AllowAny):
         serializer = repliesSerializer(replies, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
-    def post(self, request, format=None):
-        serializer = repliesSerializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        serializer.save()
-        return Response(serializer.data, status=status.HTTP_201_CREATED)
+ 
 
 class RepliesDetail(APIView, IsAuthenticated):
     def get_object(self, pk):
@@ -28,24 +24,30 @@ class RepliesDetail(APIView, IsAuthenticated):
         except Replies.DoesNotExist:
             raise Http404
 
-    def get(self, request, pk, format=None):
-        replies = self.get_object(pk)
-        serializer = repliesSerializer(replies)
-        return Response(serializer.data, status=status.HTTP_200_OK)
-
-    def put(self, request, pk, format=None):
-        replies = self.get_object(pk)
-        serializer = repliesSerializer(replies, data=request.data)
+    def post(self, request, format=None):
+        serializer = repliesSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-        serializer.save()
+        serializer.save(user=request.user)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+    # def get(self, request, pk, format=None):
+    #     replies = self.get_object(pk)
+    #     serializer = repliesSerializer(replies)
+    #     return Response(serializer.data, status=status.HTTP_200_OK)
+
+    # def put(self, request, pk, format=None):
+    #     replies = self.get_object(pk)
+    #     serializer = repliesSerializer(replies, data=request.data)
+    #     serializer.is_valid(raise_exception=True)
+    #     serializer.save()
+    #     return Response(serializer.data, status=status.HTTP_201_CREATED)
 
     def delete(self, request, pk, format=None):
         replies = self.get_object(pk)
         replies.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
-class RepliesFK(APIView, AllowAny):
+class RepliesFK(APIView, IsAuthenticated):
     def get(self, request, fk, format=None):
         replies = Replies.objects.filter(comments=fk)
         serializer = repliesSerializer(replies, many=True)
