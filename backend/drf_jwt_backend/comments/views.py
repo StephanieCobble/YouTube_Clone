@@ -40,9 +40,10 @@ class CommentsDetail(APIView, IsAuthenticated):
     #     return Response(status=status.HTTP_204_NO_CONTENT)
 
 class UpdateComment(APIView, IsAuthenticated):
-    def put(self, request, pk, comments_id, format=None):
+    def put(self, request, comments_id, format=None):
         comments = Comments.objects.get(id=comments_id)
         serializer = CommentsSerializer(comments, data=request.data)
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return Response(serializer.data, status=status.HTTP_201_CREATED)
+        
