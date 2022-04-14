@@ -1,8 +1,16 @@
 from rest_framework import serializers
 from .models import Replies;
+from django.contrib.auth.models import User
 
+
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['id', 'username']
 
 class repliesSerializer(serializers.ModelSerializer):
-    class meta:
+    user = UserSerializer(read_only=True)
+    class Meta:
         model = Replies
-        fields = ['id','user_id','comment','text']
+        fields = ['id','user','comment','text']
+

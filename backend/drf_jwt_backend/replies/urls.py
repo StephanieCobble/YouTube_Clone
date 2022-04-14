@@ -3,10 +3,10 @@ from rest_framework.urlpatterns import format_suffix_patterns
 from .import views
 
 urlpatterns = [
-    path('', views.RepliesList.as_view()),
+    # path('', views.RepliesList.as_view()),
     
-    path('<int:pk>/', views.RepliesDetail.as_view()),
-    path('fk/<int:fk>/', views.RepliesFK.as_view())
+    path('new/', views.RepliesDetail.as_view()), #to create a comment (or delete)
+    path('fk/<int:fk>/', views.RepliesFK.as_view())   #to get replies by comment id
 ]
 
 

@@ -1,5 +1,4 @@
-from itertools import product
-from django.http import Http404
+
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
@@ -9,11 +8,11 @@ from .serializer import repliesSerializer
 
 # Create your views here.
 
-class RepliesList(APIView, AllowAny):
-    def get(self, request, format=None):
-        replies = Replies.objects.all()
-        serializer = repliesSerializer(replies, many=True)
-        return Response(serializer.data, status=status.HTTP_200_OK)
+# class RepliesList(APIView, AllowAny):
+#     def get(self, request, format=None):
+#         replies = Replies.objects.all()
+#         serializer = repliesSerializer(replies, many=True)
+#         return Response(serializer.data, status=status.HTTP_200_OK)
 
  
 
@@ -30,6 +29,19 @@ class RepliesDetail(APIView, IsAuthenticated):
         serializer.save(user=request.user)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
+
+# class ReplyPost(APIView, IsAuthenticated):
+
+#     def post(self, request):
+#         serializer = ReplySerializer(data=request.data)
+#         print("User: ", request.user)
+#         print("Request: " + str(request.data))
+#         if serializer.is_valid():
+#             serializer.save(user=request.user)
+#             return Response(serializer.data, status=status.HTTP_201_CREATED)
+#         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
     # def get(self, request, pk, format=None):
     #     replies = self.get_object(pk)
     #     serializer = repliesSerializer(replies)
@@ -43,12 +55,12 @@ class RepliesDetail(APIView, IsAuthenticated):
     #     return Response(serializer.data, status=status.HTTP_201_CREATED)
 
     def delete(self, request, pk, format=None):
-        replies = self.get_object(pk)
+        replies = Replies.objects.get(pk)
         replies.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 class RepliesFK(APIView, IsAuthenticated):
     def get(self, request, fk, format=None):
-        replies = Replies.objects.filter(comments=fk)
+        replies = Replies.objects.filter(comment=fk)
         serializer = repliesSerializer(replies, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
