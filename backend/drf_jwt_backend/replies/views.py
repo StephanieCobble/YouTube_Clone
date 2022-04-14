@@ -8,56 +8,22 @@ from .serializer import repliesSerializer
 
 # Create your views here.
 
-# class RepliesList(APIView, AllowAny):
-#     def get(self, request, format=None):
-#         replies = Replies.objects.all()
-#         serializer = repliesSerializer(replies, many=True)
-#         return Response(serializer.data, status=status.HTTP_200_OK)
-
- 
-
-class RepliesDetail(APIView, IsAuthenticated):
-    # def get_object(self, pk):
-    #     try:
-    #         return Replies.objects.get(pk=pk)  
-    #     except Replies.DoesNotExist:
-    #         raise Http404
-
+class RepliesList(APIView, AllowAny):
     def post(self, request, format=None):
         serializer = repliesSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         serializer.save(user=request.user)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
+ 
 
-# class ReplyPost(APIView, IsAuthenticated):
-
-#     def post(self, request):
-#         serializer = ReplySerializer(data=request.data)
-#         print("User: ", request.user)
-#         print("Request: " + str(request.data))
-#         if serializer.is_valid():
-#             serializer.save(user=request.user)
-#             return Response(serializer.data, status=status.HTTP_201_CREATED)
-#         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+# class RepliesDetail(APIView, IsAuthenticated):
+#     def delete(self, request, pk, format=None):
+#         replies = Replies.objects.get(pk)
+#         replies.delete()
+#         return Response(status=status.HTTP_204_NO_CONTENT)
 
 
-    # def get(self, request, pk, format=None):
-    #     replies = self.get_object(pk)
-    #     serializer = repliesSerializer(replies)
-    #     return Response(serializer.data, status=status.HTTP_200_OK)
-
-    # def put(self, request, pk, format=None):
-    #     replies = self.get_object(pk)
-    #     serializer = repliesSerializer(replies, data=request.data)
-    #     serializer.is_valid(raise_exception=True)
-    #     serializer.save()
-    #     return Response(serializer.data, status=status.HTTP_201_CREATED)
-
-    def delete(self, request, pk, format=None):
-        replies = Replies.objects.get(pk)
-        replies.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
 
 class RepliesFK(APIView, IsAuthenticated):
     def get(self, request, fk, format=None):

@@ -5,7 +5,7 @@ from .import views
 urlpatterns = [
     path('<str:video_id>/', views.CommentsList.as_view()),
     # path('<int:pk>/', views.CommentsDetail.as_view()),
-    path('', views.CommentsDetail.as_view()),
+    path('', views.CommentsList.as_view()),
     path('update/<int:comments_id>/', views.UpdateComment.as_view())
 ]
 

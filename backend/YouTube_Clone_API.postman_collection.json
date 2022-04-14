@@ -49,7 +49,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"user\": \"2\",\n    \"video_id\": \"Jq4xfAMZQsI\",\n    \"text\": \"Woot!\",\n    \"likes\": 1,\n    \"dislikes\": 1\n}",
+							"raw": "{\n    \"user\": \"2\",\n    \"video_id\": \"Jq4xfAMZQsI\",\n    \"text\": \"Very cool!\",\n    \"likes\": 1,\n    \"dislikes\": 1\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -92,7 +92,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"user\": 2,\n    \"video_id\": \"Jq4xfAMZQsI\",\n    \"text\": \"This is SUPER great!\",\n    \"likes\": 1,\n    \"dislikes\": 1\n}",
+							"raw": "{\n    \"user\": 2,\n    \"video_id\": \"Jq4xfAMZQsI\",\n    \"text\": \"This is TOTALLY great!\",\n    \"likes\": 1,\n    \"dislikes\": 1\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -178,7 +178,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"user\": 2,\n    \"comment\": 1,\n    \"text\": \"hello\"\n}",
+							"raw": "{\n    \"user\": 2,\n    \"comment\": 1,\n    \"text\": \"Yes!\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"

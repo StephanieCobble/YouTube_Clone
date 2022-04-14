@@ -14,30 +14,11 @@ class CommentsList(APIView, AllowAny):
         serializer = CommentsSerializer(comments, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
-    
-
-class CommentsDetail(APIView, IsAuthenticated):
-    # def get_object(self, pk):
-    #     try:
-    #         return Comments.objects.get(pk=pk)  
-    #     except Comments.DoesNotExist:
-    #         raise Http404
-
     def post(self, request, format=None):
         serializer = CommentsSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return Response(serializer.data, status=status.HTTP_201_CREATED)
-
-    # def get(self, request, pk, format=None):
-    #     comments = self.get_object(pk)
-    #     serializer = CommentsSerializer(comments)
-    #     return Response(serializer.data, status=status.HTTP_200_OK)
-
-    # def delete(self, request, pk, format=None):
-    #     comments = self.get_object(pk)
-    #     comments.delete()
-    #     return Response(status=status.HTTP_204_NO_CONTENT)
 
 class UpdateComment(APIView, IsAuthenticated):
     def put(self, request, comments_id, format=None):

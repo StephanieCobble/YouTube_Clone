@@ -5,7 +5,7 @@ from .import views
 urlpatterns = [
     # path('', views.RepliesList.as_view()),
     
-    path('new/', views.RepliesDetail.as_view()), #to create a comment (or delete)
+    path('new/', views.RepliesList.as_view()), #to create a comment (or delete)
     path('fk/<int:fk>/', views.RepliesFK.as_view())   #to get replies by comment id
 ]
 
