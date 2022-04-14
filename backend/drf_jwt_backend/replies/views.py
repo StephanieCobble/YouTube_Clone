@@ -18,11 +18,11 @@ class RepliesList(APIView, AllowAny):
  
 
 class RepliesDetail(APIView, IsAuthenticated):
-    def get_object(self, pk):
-        try:
-            return Replies.objects.get(pk=pk)  
-        except Replies.DoesNotExist:
-            raise Http404
+    # def get_object(self, pk):
+    #     try:
+    #         return Replies.objects.get(pk=pk)  
+    #     except Replies.DoesNotExist:
+    #         raise Http404
 
     def post(self, request, format=None):
         serializer = repliesSerializer(data=request.data)

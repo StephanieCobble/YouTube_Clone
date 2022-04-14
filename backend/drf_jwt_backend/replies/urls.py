@@ -4,6 +4,7 @@ from .import views
 
 urlpatterns = [
     path('', views.RepliesList.as_view()),
+    
     path('<int:pk>/', views.RepliesDetail.as_view()),
     path('fk/<int:fk>/', views.RepliesFK.as_view())
 ]
