@@ -1,0 +1,310 @@
+{
+	"info": {
+		"_postman_id": "4b009c1c-bf2c-4f2a-b65b-3f6c26cbc43c",
+		"name": "YouTube_Clone_API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Comments",
+			"item": [
+				{
+					"name": "Get_All_Comments",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/comments/Jq4xfAMZQsI",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"comments",
+								"Jq4xfAMZQsI"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create_Comment",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjUwODE5MTUzLCJpYXQiOjE2NDk5NTUxNTMsImp0aSI6IjM1ZTkwNzhmNmZlZjRkMjg4MzQwMTY1OGNiMzE2MTY2IiwidXNlcl9pZCI6MiwidXNlcm5hbWUiOiJzY29iYmxlIiwiZmlyc3RfbmFtZSI6IlN0ZXBoYW5pZSJ9.0otpLoBYLe8ZxYUH_Ft2dFHJU9MVIfivVkJ3eDCE0Kc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"user\": \"2\",\n    \"video_id\": \"Jq4xfAMZQsI\",\n    \"text\": \"Woot!\",\n    \"likes\": 1,\n    \"dislikes\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/comments/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"comments",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update_Comment",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjUwODE5MTUzLCJpYXQiOjE2NDk5NTUxNTMsImp0aSI6IjM1ZTkwNzhmNmZlZjRkMjg4MzQwMTY1OGNiMzE2MTY2IiwidXNlcl9pZCI6MiwidXNlcm5hbWUiOiJzY29iYmxlIiwiZmlyc3RfbmFtZSI6IlN0ZXBoYW5pZSJ9.0otpLoBYLe8ZxYUH_Ft2dFHJU9MVIfivVkJ3eDCE0Kc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"user\": 2,\n    \"video_id\": \"Jq4xfAMZQsI\",\n    \"text\": \"This is SUPER great!\",\n    \"likes\": 1,\n    \"dislikes\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/comments/update/1/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"comments",
+								"update",
+								"1",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Replies",
+			"item": [
+				{
+					"name": "Get_Reply_By_Comment_Id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjUwODE5MTUzLCJpYXQiOjE2NDk5NTUxNTMsImp0aSI6IjM1ZTkwNzhmNmZlZjRkMjg4MzQwMTY1OGNiMzE2MTY2IiwidXNlcl9pZCI6MiwidXNlcm5hbWUiOiJzY29iYmxlIiwiZmlyc3RfbmFtZSI6IlN0ZXBoYW5pZSJ9.0otpLoBYLe8ZxYUH_Ft2dFHJU9MVIfivVkJ3eDCE0Kc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/comments/replies/fk/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"comments",
+								"replies",
+								"fk",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create_Reply",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjUwODE5MTUzLCJpYXQiOjE2NDk5NTUxNTMsImp0aSI6IjM1ZTkwNzhmNmZlZjRkMjg4MzQwMTY1OGNiMzE2MTY2IiwidXNlcl9pZCI6MiwidXNlcm5hbWUiOiJzY29iYmxlIiwiZmlyc3RfbmFtZSI6IlN0ZXBoYW5pZSJ9.0otpLoBYLe8ZxYUH_Ft2dFHJU9MVIfivVkJ3eDCE0Kc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"user\": 2,\n    \"comment\": 1,\n    \"text\": \"hello\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/comments/replies/new/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"comments",
+								"replies",
+								"new",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "Get_Authentication",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/auth/login/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"auth",
+								"login",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register_User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"scobble\",\n    \"password\": \"beepBorp!13\",\n    \"email\": \"abaddon928@gmail.com\",\n    \"first_name\": \"Stephanie\",\n    \"last_name\": \"Cobble\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/auth/register/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"auth",
+								"register",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login_User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"scobble\",\n    \"password\": \"beepBorp!13\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/auth/login/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"auth",
+								"login",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
