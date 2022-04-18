@@ -1,5 +1,8 @@
 import react from "react";
 import SearchPage from "../SearchPage/SearchPage";
+import RelatedVideos from "../RelatedVideos/RelatedVideos";
+
+
 
 const VideoPage = (props) => {
   return (
@@ -13,6 +16,9 @@ const VideoPage = (props) => {
       target="_parent"
     ></iframe>
   );
+  <div>
+    <RelatedVideos/>
+  </div>
 };
 
 export default VideoPage;
