@@ -1,25 +1,42 @@
 import axios from "axios"; 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react/cjs/react.production.min";
+// import { useState, useEffect } from "react/cjs/react.production.min";
 
 const SearchPage = () => {
 
-const {query, setQuery} = useState('')
+const [query, setQuery] = useState([])
+const [userEntry, setUserEntry] = useState('castles')
+useEffect(() => {
+    searchVideo()
+    console.log(useEffect)
+}, [])
+
 
 async function searchVideo() {
+
     try {
-        let response = await axios.get(`https://www.googleapis.com/youtube/v3/search?q=UCf89VTPA8o&key=AIzaSyAuqNDY-4LJQObGQHrx_4LBicAlbSuucDI`);
-        setQuery(response.data)
-        console.log(response.data)
+        let response = await axios.get(`https://www.googleapis.com/youtube/v3/search?q=${userEntry}&type=video&key=AIzaSyAuqNDY-4LJQObGQHrx_4LBicAlbSuucDI&part=snippet`);
+        setQuery(response.data.items)
+        console.log(response.data.items)
+        debugger;
     } catch (error) {
         console.log("Try again!")
     }
 }
 
+function mapVideos(){console.log('mapVideos')
+return query.map()}
+
 return (
-    console.log(searchVideo)
+    <div>
+        
+    {/* {query.map((video, index) => {
+    return(
+    <p key={index}>{video.id.videoId}</p>
+    )} */}
+    </div>
 );
 
-};
+    };
 export default SearchPage; 

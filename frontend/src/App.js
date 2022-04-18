@@ -1,7 +1,8 @@
 // General Imports
 import { Routes, Route } from "react-router-dom";
 import "./App.css";
-
+import { useEffect, useState } from "react";
+import axios from "axios";
 // Pages Imports
 import HomePage from "./pages/HomePage/HomePage";
 import LoginPage from "./pages/LoginPage/LoginPage";
@@ -18,6 +19,26 @@ import Footer from "./components/Footer/Footer";
 import PrivateRoute from "./utils/PrivateRoute";
 
 function App() {
+  const [userEntry, setUserEntry] = useState('castles')
+  const [videoId, setVideoId] = useState('')
+useEffect(() => {
+    searchVideo()
+    console.log(useEffect)
+}, [])
+
+
+async function searchVideo() {
+
+    try {
+        let response = await axios.get(`https://www.googleapis.com/youtube/v3/search?q=${userEntry}&type=video&key=AIzaSyAuqNDY-4LJQObGQHrx_4LBicAlbSuucDI&part=snippet`);
+        //setQuery(response.data.items)
+        setVideoId(response.data.items[0].id.videoId)
+        console.log(response.data.items)
+        debugger;
+    } catch (error) {
+        console.log("Try again!")
+    }
+}
   return (
     <div>
       <Navbar />
@@ -34,7 +55,7 @@ function App() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/comment" element={<PrivateRoute><CommentForm /></PrivateRoute>} />
         <Route path="/search" element={<SearchPage />} />
-        <Route path="/videopage" element={<VideoPage />} />
+        <Route path="/videopage" element={<VideoPage videoId ={videoId}/>} />
       </Routes>
       <Footer />
     </div>

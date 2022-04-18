@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'corsheaders',
     'cars.apps.CarsConfig',  # This app is for example use only
     'comments',
-    'replies'
+    'replies',
+    'drf_jwt_backend'
 ]
 
 MIDDLEWARE = [
