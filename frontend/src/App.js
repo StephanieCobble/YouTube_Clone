@@ -65,3 +65,6 @@ async function searchVideo() {
 }
 
 export default App;
+
+
+//steph api key: key=AIzaSyAuqNDY-4LJQObGQHrx_4LBicAlbSuucDI

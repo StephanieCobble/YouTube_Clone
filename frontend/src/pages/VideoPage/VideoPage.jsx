@@ -16,9 +16,9 @@ const VideoPage = (props) => {
       target="_parent"
     ></iframe>
   );
-  <div>
-    <RelatedVideos/>
-  </div>
+  // <div>
+  //   <RelatedVideos/>
+  // </div>
 };
 
 export default VideoPage;
