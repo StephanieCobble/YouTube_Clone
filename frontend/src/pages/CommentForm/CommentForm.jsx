@@ -24,7 +24,7 @@ const CommentForm = () => {
                     Authorization: "Bearer " + token,
                 },
             });
-            navigate("/")
+            navigate("/VideoPage")
         } catch (error) {
             console.log(error.message);
         }
@@ -91,7 +91,7 @@ const CommentForm = () => {
           <p style={{ fontSize: "12px" }}>
             Add New Comment!
           </p>
-          <button>Submit!</button>
+          <button type='submit'>Submit!</button>
         </form>
       </div>
     );

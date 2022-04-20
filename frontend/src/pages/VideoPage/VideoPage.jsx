@@ -4,6 +4,8 @@ import RelatedVideos from "../RelatedVideos/RelatedVideos";
 import React, { useState, useEffect } from 'react';
 import axios from "axios";
 import CommentForm from "../CommentForm/CommentForm";
+import Comment from "../Comment/Comment";
+import { renderMatches } from "react-router-dom";
 
 
 const VideoPage = (props) => {
@@ -17,25 +19,25 @@ const VideoPage = (props) => {
         console.log(useEffect)
     }, [])
     
-    async function relatedVid(props) {
+    async function relatedVid() {
     let response = await axios.get(`https://www.googleapis.com/youtube/v3/search?relatedToVideoId=${props.videoId}&type=video&key=AIzaSyAuqNDY-4LJQObGQHrx_4LBicAlbSuucDI&maxResults=5&part=snippet`);
         setRelatedVideos(response.data.items)
         debugger;
     };
-    relatedVideos.map(element => {
-      let url = [element.items.snippet.thumbnails.high.url]
-      let video_Id = [element.items.videoId]
-      setRelatedUrls(url);
-      setRelatedVideoId(video_Id);
-      debugger;
-    });
-
-    // relatedUrl.map(function(url,index)){
-    //   let 
-    // }
+    
+    
+        // relatedVideos.map(function(element) {
+        //   let url = [element.snippet.thumbnails.high.url]
+        //   let video_Id = [element.id.videoId]
+        //   setRelatedUrls(url);
+        //   setRelatedVideoId(video_Id);
+        //   debugger;
+        // })
+      
+    
   return (
     <div>
-      <body>
+   
       <iframe
         id="ytplayer"
         type="text/html"
@@ -47,21 +49,23 @@ const VideoPage = (props) => {
       ></iframe>
       <h2>Title:{props.videoTitle}</h2>
       <h2>Description:{props.videoDesc}</h2>
-     
-        <CommentForm/>
       
-      </body>
-    <form>
+      {relatedVideos.map((element)=>{
+        if(element.snippet){
+          return <img src = {element.snippet.thumbnails.high.url}/>
+        }else{
+          return(
+            <p>No thumbnail:(</p>
+          )
+        }
+      })}
+      <CommentForm />
+      {/* <Comment/> */}
+      
+      
       <table>
-        <button>
-          
-        {/* <img rel='thumbnail' src={relatedUrl[0]}/>
-        {relatedUrl.map((url) => <img src={url} />
-        )};  */}
-        </button>  
-      
-        </table>  
-      </form>
+        {/* <img src={relatedUrl[1]}/> */}
+      </table>  
    
     </div>   
    
