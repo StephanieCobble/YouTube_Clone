@@ -1,8 +1,9 @@
 // General Imports
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useParams } from "react-router-dom";
 import "./App.css";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 // Pages Imports
 import HomePage from "./pages/HomePage/HomePage";
 import LoginPage from "./pages/LoginPage/LoginPage";
@@ -23,6 +24,7 @@ function App() {
   const [videoId, setVideoId] = useState('')
   const [videoTitle, setVideoTitle] = useState('')
   const [videoDesc, setVideoDesc] = useState('')
+  const { video } = useParams();
 useEffect(() => {
     searchVideo()
     console.log(useEffect)
@@ -32,7 +34,7 @@ useEffect(() => {
 async function searchVideo() {
 
     try {
-        let response = await axios.get(`https://www.googleapis.com/youtube/v3/search?q=${userEntry}&type=video&key=AIzaSyBTPi_bFaIRjEMsCka9fEpNF3EkNJMHUlg&part=snippet`);
+        let response = await axios.get(`https://www.googleapis.com/youtube/v3/search?q=${userEntry}&type=video&key=AIzaSyDasbaAHFIT6SMPUR2wH4w9vt-nWJgh9no&part=snippet`);
         //setQuery(response.data.items)
         setVideoId(response.data.items[0].id.videoId)
         setVideoTitle(response.data.items[0].snippet.title)
@@ -61,7 +63,7 @@ async function searchVideo() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/comment" element={<PrivateRoute><CommentForm /></PrivateRoute>} />
         <Route path="/search" element={<SearchPage />} />
-        <Route path="/videopage" element={<VideoPage videoId ={videoId} videoTitle={videoTitle} videoDesc={videoDesc}/>} />
+        <Route path="/videopage/:video" element={<VideoPage videoId ={videoId} videoTitle={videoTitle} videoDesc={videoDesc}/>} />
       </Routes>
       <Footer />
     </div>
