@@ -1,0 +1,47 @@
+
+.rating {
+    width: 100%;
+    margin-top: 40px;
+    padding-top: 40px;
+    text-align: center;
+    display: flex;
+    justify-content:center;
+    
+}
+
+
+.dislike-inactive:hover {
+    background-color: rgb(252, 64, 64);
+    
+    box-shadow: rgb(116, 86, 86);
+    transition: all .2s ease-in-out;
+    transform: scale(1.1);
+}
+
+.like-inactive:hover {
+  background-color: rgb(68, 193, 68);
+  box-shadow: rgb(95, 119, 100);
+  transition: all .2s ease-in-out;
+  transform: scale(1.1);
+}
+
+.like-inactive,
+.dislike-inactive{
+    background-color: rgba(145, 145, 145, 0.783);
+    border-radius: 75%;
+    margin-right: .5em;
+    
+}
+
+.like-active{
+    background-color: rgb(68, 193, 68);
+    border-radius: 75%;
+    margin-right: .5em;
+    
+}
+
+.dislike-active{
+    background-color: rgb(252, 64, 64);
+    border-radius: 75%;
+    margin-right: .5em;
+}

@@ -1,8 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import useAuth from "../../hooks/useAuth";
+import { useNavigate } from "react-router-dom";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { faThumbsDown, faThumbsUp } from "@fortawesome/free-solid-svg-icons";
 
-const Comment = (props) => {
+import "./LikeDislike.css";
+
+const LikeDislike = (props) => {
   const [comments, setComments] = useState([])
   const [comment, singleComment] = useState('')
   const [likes, setLikes] = useState('')
@@ -12,18 +19,31 @@ const Comment = (props) => {
   const [dislikeSelected, setDislikeSelected] = useState(false);
   const [likeClass, setLikeClass] = useState("like-inactive");
   const [dislikeClass, setDislikeClass] = useState("dislike-inactive");
+
+  const [ token] = useAuth();
+  const navigate = useNavigate();
   GetComments()
 
-  async function GetComments(props){
-  let response = await axios.get(`http://127.0.0.1:8000/api/comments/${props.videoId}`)
-  setComments(response.data)
-};
-  comments.map(function(element){
+  async function GetComments(){
+  try {
+    await axios.put(`http://127.0.0.1:8000/api/comments/update/${props.videoId}`, {
+    headers: {
+      Authorization: "Bearer " + token,
+  },
+});
+navigate("/videopage")
+} catch (error) {
+console.log(error.message);
+}
+}
+
+
+  comments.map((element, id) => {
   singleComment(element.text)
   setLikes(element.likes)
   setDislikes(element.dislikes)
   setUser(element.user)
-  console.log([])
+  
 });
  
 
@@ -61,25 +81,43 @@ const Comment = (props) => {
     }
   }, [dislikeSelected]);
 
+
+  library.add(faThumbsUp, faThumbsDown);
+
     return (
-      <div>
+      <div className='rating'>
+        <div>
         <table>
       <h2>Username:{user}</h2>
-      <body>
+      <div>
         <p>
         Comment:{comment}
         </p>
-        <button className={likeClass} onClick={handleLike}>Like{likes}</button>
-        <button className={dislikeClass} onClick={handleDislike}>Dislike{dislikes}</button>
-      </body>  
+        <div>Like{likes}
+        <button className={likeClass} onClick={handleLike}>
+        <FontAwesomeIcon
+            color="#525753"
+            icon={["fa-solid", "fa-thumbs-up"]}
+          />
+        </button>
+        </div>
+        <div> Dislike{dislikes}
+        <button className={dislikeClass} onClick={handleDislike}>
+        <FontAwesomeIcon
+            color="#525753"
+            icon={["fa-solid", "fa-thumbs-down"]}
+          />
+        </button>
+        </div>
+      </div>  
         </table>
 
 
 
-
+        </div>
       </div>
         
       );
 }
  
-export default Comment;
+export default LikeDislike;

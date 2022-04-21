@@ -4,7 +4,7 @@ import RelatedVideos from "../RelatedVideos/RelatedVideos";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import CommentForm from "../CommentForm/CommentForm";
-import Comment from "../Comment/Comment";
+import LikeDislike from "../LikeDislike/LikeDislike";
 import { Link, renderMatches, useParams} from "react-router-dom";
 
 const VideoPage = (props) => {
@@ -74,7 +74,8 @@ function handleClick(element) {
         }
       })}
       <CommentForm />
-      {/* <Comment/> */}
+      
+      {/* <LikeDislike/> */}
 
       <table>{/* <img src={relatedUrl[1]}/> */}</table>
     </div>

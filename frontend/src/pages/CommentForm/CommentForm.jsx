@@ -3,20 +3,23 @@ import useCustomForm from "../../hooks/useCustomForm";
 import axios from "axios";
 import useAuth from "../../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
+import LikeDislike from "../LikeDislike/LikeDislike";
 
 let initialValues = {
     id: "",
     user: "",
     video_id: "",
     text: "",
-    likes: "",
-    dislikes: ""
+    likes: 0,
+    dislikes: 0
 }
 
-const CommentForm = () => {
+const CommentForm = (props) => {
     const [user, token] = useAuth();
     const navigate = useNavigate();
     const [formData, handleInputChange, handleSubmit] = useCustomForm(initialValues, addNewComment)
+    
+    
     async function addNewComment() {
         try {
             let response = await axios.post(`http://127.0.0.1:8000/api/comments/`, formData, {
@@ -24,17 +27,30 @@ const CommentForm = () => {
                     Authorization: "Bearer " + token,
                 },
             });
-            navigate("/VideoPage")
+            navigate("/videopage")
         } catch (error) {
             console.log(error.message);
         }
+    }
+
+    async function GetComments(){
+      try {
+        await axios.put(`http://127.0.0.1:8000/api/comments/update/${props.videoId}`, {
+        headers: {
+          Authorization: "Bearer " + token,
+      },
+    });
+    navigate("/videopage")
+    } catch (error) {
+    console.log(error.message);
+    }
     }
 
     
     return ( 
         <div className="container">
         <form className="form" onSubmit={handleSubmit}>
-          <label>
+          {/* <label>
             ID:{" "}
             <input
               type="text"
@@ -42,7 +58,7 @@ const CommentForm = () => {
               value={formData.id}
               onChange={handleInputChange}
             />
-          </label>
+          </label> */}
           <label>
             User:{" "}
             <input
@@ -70,8 +86,11 @@ const CommentForm = () => {
               onChange={handleInputChange}
             />
           </label>
-          <label>
-            Likes:{" "}
+          <div> 
+            <LikeDislike/>
+          </div>
+          {/* <label>
+            Likes:{}
             <input
               type="text"
               name="likes"
@@ -80,14 +99,14 @@ const CommentForm = () => {
             />
           </label>
           <label>
-            Dislikes:{" "}
+            Dislikes:{}
             <input
               type="text"
               name="dislikes"
               value={formData.dislikes}
               onChange={handleInputChange}
             />
-          </label>
+          </label> */}
           <p style={{ fontSize: "12px" }}>
             Add New Comment!
           </p>
